@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-crew',
-  templateUrl: './crew.component.html',
-  styleUrls: ['./crew.component.css']
+  selector: "app-crew",
+  templateUrl: "./crew.component.html",
+  styleUrls: ["./crew.component.css"],
 })
 export class CrewComponent implements OnInit {
-
+  
   crew: object[] = [
-    {name: "Eileen Collins", firstMission: false},
-    {name: "Mae Jemison", firstMission: false},
-    {name: "Ellen Ochoa", firstMission: true}
+    { name: "Eileen Collins", firstMission: false },
+    { name: "Mae Jemison", firstMission: false },
+    { name: "Ellen Ochoa", firstMission: true },
   ];
 
   memberBeingEdited: object = null;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   add(memberName: string, isFirst: boolean) {
-    this.crew.push({name: memberName, firstMission: isFirst});
+    this.crew.push({ name: memberName, firstMission: isFirst });
   }
 
   remove(member: object) {
@@ -34,7 +33,7 @@ export class CrewComponent implements OnInit {
   }
 
   save(name: string, member: object) {
-    member['name'] = name;
+    member["name"] = name;
     this.memberBeingEdited = null;
   }
 }
