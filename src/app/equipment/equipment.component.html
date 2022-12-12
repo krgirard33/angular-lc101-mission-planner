@@ -1,12 +1,23 @@
 <h3>Equipment</h3>
 <ul>
   <li *ngFor="let item of equipmentList">
-    <span>
-      {{item.name}}
+    <span *ngIf="itemBeingEdited !== item; else elseBlock">
+      <!-- displays state of item -->
+      <span (click)="editItem(item)" class="editable-text">
+        {{ item.name }}
+      </span>
     </span>
     <button (click)="removeItem(item)">remove</button>
+
+    <ng-template #elseBlock>
+      <input
+        #updatedItem
+        (keyup.enter)="saveItem(updatedItem.value, item)"
+        value="{{ item.name }}"
+      />
+      <button (click)="saveItem(updatedItem.value, item)">Save</button>
+    </ng-template>
   </li>
-    
 </ul>
 
 <input #itemNew type="text" />

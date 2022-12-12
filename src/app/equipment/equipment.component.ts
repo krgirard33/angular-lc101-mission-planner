@@ -1,30 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-equipment',
-  templateUrl: './equipment.component.html',
-  styleUrls: ['./equipment.component.css']
+  selector: "app-equipment",
+  templateUrl: "./equipment.component.html",
+  styleUrls: ["./equipment.component.css"],
 })
 export class EquipmentComponent implements OnInit {
-
   equipmentList: object[] = [
-    {name: "Habitat dome"},
-    {name: "Drones"},
-    {name: "Food containers"},
-    {name: "Oxygen tanks"},
+    { name: "Habitat dome" },
+    { name: "Drones" },
+    { name: "Food containers" },
+    { name: "Oxygen tanks" },
   ];
 
-  constructor() { }
+  itemBeingEdited: object = null;
 
-  ngOnInit() {
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
   addItem(itemNew: object) {
-    this.equipmentList.push({ name: itemNew })
+    this.equipmentList.push({ name: itemNew });
   }
 
-  removeItem(item: object){
+  removeItem(item: object) {
     let index = this.equipmentList.indexOf(item);
-    this.equipmentList.splice(index, 1)
+    this.equipmentList.splice(index, 1);
+  }
+
+  editItem(item: object) {
+    this.itemBeingEdited = item;
+  }
+
+  saveItem(thing: string, item: object) {
+    item["name"] = thing;
+    this.itemBeingEdited = null;
   }
 }
