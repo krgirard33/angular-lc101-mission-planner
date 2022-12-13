@@ -19,8 +19,10 @@ export class EquipmentComponent implements OnInit {
 
   ngOnInit() {}
 
-  addItem(itemNew: object) {
-    this.equipmentList.push({ name: itemNew });
+  addItem(itemNew: string) {
+    if (!this.itemAlreadyAdded(itemNew)) {
+      this.equipmentList.push({ name: itemNew });
+    }
   }
 
   removeItem(item: object) {
@@ -33,7 +35,17 @@ export class EquipmentComponent implements OnInit {
   }
 
   saveItem(thing: string, item: object) {
-    item["name"] = thing;
+    if (!this.itemAlreadyAdded(thing)) {
+      item["name"] = thing;
+    }
     this.itemBeingEdited = null;
+  }
+
+  itemAlreadyAdded(item: string): boolean {
+    for (let i = 0; i < this.equipmentList.length; i++)
+      if (this.equipmentList[i].name === item) {
+        return true;
+      }
+    return false;
   }
 }

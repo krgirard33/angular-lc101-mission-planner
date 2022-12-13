@@ -19,7 +19,9 @@ export class ExperimentsComponent implements OnInit {
   ngOnInit() {}
 
   addExperiment(experimentName: string) {
-    this.experimentsList.push({ name: experimentName });
+    if(!this.experimentAlreadyAdded(experimentName)) {
+      this.experimentsList.push({ name: experimentName });
+    }
   }
 
   removeExperiment(experimentName: object) {
@@ -31,8 +33,18 @@ export class ExperimentsComponent implements OnInit {
     this.experimentBeingEdited = experimentName;
   }
 
-  saveExperiment(name: string, experimentName: object) {
-    experimentName["name"] = name;
+  saveExperiment(nameEdit: string, experimentName: object) {
+    if(!this.experimentAlreadyAdded(nameEdit)) {
+      experimentName["name"] = nameEdit;
+    }
     this.experimentBeingEdited = null;
+  }
+
+  experimentAlreadyAdded(nameIncoming: string): boolean {
+    for (let i = 0; i < this.experimentsList.length; i++)
+      if (this.experimentsList[i].name === nameIncoming) {
+        return true;
+      }
+    return false;
   }
 }
